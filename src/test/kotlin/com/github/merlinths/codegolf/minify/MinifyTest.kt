@@ -56,14 +56,28 @@ class MinifyTest {
     }
 
     @Test
-    fun `Arithmetic operations`() {
-        val arithmeticOperation = """
+    fun `Arithmetical operations`() {
+        val operation = """
             var result = ( x * Math . pow( i + 3 *  5 - 2) % 13 / 999999_999 )  ;
         """
 
         assertEquals(
             expected = "var result=(x*Math.pow(i+3*5-2)%13/999999_999);",
-            actual = arithmeticOperation.minify()
+            actual = operation.minify()
+        )
+    }
+
+    @Test
+    fun `Logical operations`() {
+        val operations = """
+           final var result  =      ( 
+                true  | false && ( 33 > 2) || a&b ^ c^d|e
+                ) ;
+        """
+
+        assertEquals(
+            expected = """final var result=(true|false&&(33>2)||a&b^c^d|e);""",
+            actual = operations.minify()
         )
     }
 
