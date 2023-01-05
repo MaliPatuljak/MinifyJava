@@ -24,5 +24,5 @@ Using
 
 ```kotlin
 val javaCode = "..."
-val minifiedCode = javacode.minify()
+val minifiedCode = javaCode.minify()
 ```
