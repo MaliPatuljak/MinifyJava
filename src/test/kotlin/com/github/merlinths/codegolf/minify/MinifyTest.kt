@@ -95,4 +95,16 @@ class MinifyTest {
             actual = lambda.minify()
         )
     }
+
+    @Test
+    fun `Brackets in String literals`() {
+        val string = """
+            val myString  = "  (   H e l l o   ,  W o r l d ! ) ";
+        """
+
+        assertEquals(
+            expected = """val myString="  (   H e l l o   ,  W o r l d ! ) ";""",
+            actual = string.minify()
+        )
+    }
 }
