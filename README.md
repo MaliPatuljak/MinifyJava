@@ -26,3 +26,18 @@ Using
 val javaCode = "..."
 val minifiedCode = javaCode.minify()
 ```
+
+## Installation
+
+build.gradle.kts
+
+```gradle
+
+repositories {
+    maven(url = "https://jitpack.io")
+}
+
+dependencies {
+  implementation("com.github.MaliPatuljak:MinifyJava:v1.0.2")
+}
+```
