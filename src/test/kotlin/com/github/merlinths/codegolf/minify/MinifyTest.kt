@@ -107,4 +107,16 @@ class MinifyTest {
             actual = string.minify()
         )
     }
+
+    @Test
+    fun `Ternary operator`() {
+        val operation = """
+            val result = (   83 < 9 )  ?   0      :   9   ;
+        """
+
+        assertEquals(
+            expected = "val result=(83<9)?0:9;",
+            actual = operation.minify()
+        )
+    }
 }
