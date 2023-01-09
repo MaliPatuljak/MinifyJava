@@ -1,5 +1,7 @@
 package com.github.merlinths.codegolf.minify
 
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -97,6 +99,43 @@ class MinifyTest {
     }
 
     @Test
+    fun `Escaped quotation marks`() {
+        val quote = """
+            var test = "  He said: \" Hello   world ! \"  ";
+        """
+
+        assertEquals(
+            expected = """var test="  He said: \" Hello   world ! \"  ";""",
+            actual = quote.minify()
+        )
+    }
+
+    @Test
+    fun `Quotation marks`() {
+        val quote = """
+            var test = "   " ;
+            String anotherOne = "     " +  "  " ;
+        """
+
+        assertEquals(
+            expected = """var test="   ";String anotherOne="     "+"  ";""",
+            actual = quote.minify()
+        )
+    }
+
+    @Test
+    fun `Quotation mark in char declaration`() {
+        val declaration = """ 
+             char character    =   '"'    ;
+        """
+
+        assertEquals(
+            expected = """char character='"';""",
+            actual = declaration.minify()
+        )
+    }
+
+    @Test
     fun `Brackets in String literals`() {
         val string = """
             val myString  = "  (   H e l l o   ,  W o r l d ! ) ";
@@ -118,5 +157,41 @@ class MinifyTest {
             expected = "val result=(83<9)?0:9;",
             actual = operation.minify()
         )
+    }
+
+    @Nested
+    @DisplayName("Elements to remove")
+    inner class RemoveElementsTest {
+        @Test
+        fun `Single line comment`() {
+            val comment = """
+            System   . out    
+             . println(  "Hello"  );  // Hopefully removed...
+             
+             
+             // Another one
+             
+        """
+
+            assertEquals(
+                expected = """System.out.println("Hello");""",
+                actual = comment.minify()
+            )
+        }
+
+        @Test
+        fun `Multi line comment`() {
+            val comment = """
+            /*
+                Some info! "
+            */
+            val onlyLine = 1;
+        """
+
+            assertEquals(
+                expected = "val onlyLine=1;",
+                actual = comment.minify()
+            )
+        }
     }
 }
