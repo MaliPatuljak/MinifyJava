@@ -5,8 +5,8 @@ plugins {
     `maven-publish`
 }
 
-group = "com.github.malipatuljak"
-version = "1.0.0"
+group = "com.github.MaliPatuljak"
+version = "1.0.3"
 
 repositories {
     mavenCentral()
@@ -25,7 +25,7 @@ publishing {
         create<MavenPublication>("maven") {
             groupId = "com.github.MaliPatuljak"
             artifactId = "MinifyJava"
-            version = "1.0.0"
+            version = "1.0.3"
 
             from(components["java"])
         }
