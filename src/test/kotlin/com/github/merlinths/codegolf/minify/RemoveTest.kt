@@ -2,6 +2,7 @@ package com.github.merlinths.codegolf.minify
 
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
 
 class RemoveTest {
     @Test
@@ -34,6 +35,24 @@ class RemoveTest {
         assertEquals(
             expected = "Bob likes scripting!",
             actual = text.remove(doNotRegex)
+        )
+    }
+
+    @Test
+    fun `Remain regex order`() {
+        val expectedCode = "interface Empty {void print();}"
+        val javaCode = """package com.github./* Some bad characters: package;,} */example;$expectedCode"""
+
+        val rightOrdered = arrayOf(MultiLineComments, PackageDeclarations)
+        val wrongOrdered = rightOrdered.reversedArray()
+
+        assertEquals(
+            expected = expectedCode,
+            actual = javaCode.remove(*rightOrdered)
+        )
+        assertNotEquals(
+            illegal = expectedCode,
+            actual = javaCode.remove(*wrongOrdered)
         )
     }
 }

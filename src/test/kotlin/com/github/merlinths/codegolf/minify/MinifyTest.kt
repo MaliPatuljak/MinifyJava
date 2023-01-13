@@ -186,12 +186,13 @@ class MinifyTest {
                  interface Brainfuck {
                     public static void main(String[] args) {
                         // Body
+                        System.out.print("Sample statement!");
                     }
                  }
             """
 
             assertEquals(
-                expected = """interface Brainfuck{public static void main(String[]args){}}""",
+                expected = """interface Brainfuck{public static void main(String[]args){System.out.print("Sample statement!");}}""",
                 actual = codeWithPackage.minify()
             )
         }
