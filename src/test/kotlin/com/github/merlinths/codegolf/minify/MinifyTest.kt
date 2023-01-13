@@ -159,9 +159,43 @@ class MinifyTest {
         )
     }
 
+    @Test
+    fun `Unnecessary whitespace between keywords`() {
+        val codeWithSpaces = """
+            interface Code {
+                public    static    void    main  (  String [] args ) {
+                    /* Body */
+                }
+            }
+        """
+
+        assertEquals(
+            expected = """interface Code{public static void main(String[]args){}}""",
+            actual = codeWithSpaces.minify()
+        )
+    }
+
     @Nested
     @DisplayName("Elements to remove")
     inner class RemoveElementsTest {
+        @Test
+        fun `Package declaration`() {
+            val codeWithPackage = """
+                 package com.minify.test;
+                 
+                 interface Brainfuck {
+                    public static void main(String[] args) {
+                        // Body
+                    }
+                 }
+            """
+
+            assertEquals(
+                expected = """interface Brainfuck{public static void main(String[]args){}}""",
+                actual = codeWithPackage.minify()
+            )
+        }
+
         @Test
         fun `Single line comment`() {
             val comment = """

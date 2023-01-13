@@ -1,6 +1,6 @@
 package com.github.merlinths.codegolf.minify
 
-internal val CHARACTER_MATCHES = CHARACTER_SET.joinToString(
+internal val CharacterMatches = CharacterSet.joinToString(
     separator = "|\\",
     prefix = "\\"
 )
