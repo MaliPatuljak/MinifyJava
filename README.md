@@ -38,6 +38,6 @@ repositories {
 }
 
 dependencies {
-  implementation("com.github.MaliPatuljak:MinifyJava:v1.0.3")
+  implementation("com.github.MaliPatuljak:MinifyJava:v1.0.5")
 }
 ```
