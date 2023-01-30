@@ -3,6 +3,7 @@ package com.github.merlinths.codegolf.minify
 import com.github.merlinths.codegolf.minify.quotes.withoutQuotes
 import com.github.merlinths.codegolf.minify.space.normalizeWhitespaces
 import com.github.merlinths.codegolf.minify.space.removeWhitespaces
+import com.github.merlinths.codegolf.minify.string.remove
 
 /**
  * Minifies java code.
@@ -17,10 +18,11 @@ import com.github.merlinths.codegolf.minify.space.removeWhitespaces
  * @return Minified java code
  */
 fun String.minify() =
-    withoutQuotes {
-        remove(SingleLineComments)
-            .normalizeWhitespaces()
-            .remove(MultiLineComments, PackageDeclarations)
-            .replace(Keywords, MatchResult::removeWhitespaces)
-            .trim()
+    removeQuotesInComments()
+        .withoutQuotes {
+            remove(SingleLineComments)
+                .normalizeWhitespaces()
+                .remove(MultiLineComments, PackageDeclarations)
+                .replace(Keywords, MatchResult::removeWhitespaces)
+                .trim()
     }

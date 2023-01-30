@@ -1,4 +1,4 @@
-package com.github.merlinths.codegolf.minify
+package com.github.merlinths.codegolf.minify.string
 
 /**
  * Removes matches for every regex
@@ -8,6 +8,4 @@ package com.github.merlinths.codegolf.minify
  * @return The modified String
  */
 fun String.remove(vararg regexes: Regex): String =
-    regexes.fold(this) { text, regex ->
-        text.replace(regex, "")
-    }
+    replace(*regexes) { "" }

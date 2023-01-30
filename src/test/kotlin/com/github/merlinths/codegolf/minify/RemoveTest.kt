@@ -1,5 +1,6 @@
 package com.github.merlinths.codegolf.minify
 
+import com.github.merlinths.codegolf.minify.string.remove
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals

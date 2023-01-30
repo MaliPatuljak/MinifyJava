@@ -217,14 +217,43 @@ class MinifyTest {
         @Test
         fun `Multi line comment`() {
             val comment = """
-            /*
-                Some info! "
+            /**
+                Java Doc
             */
-            val onlyLine = 1;
+            int onlyLine = 1;
         """
 
             assertEquals(
-                expected = "val onlyLine=1;",
+                expected = "int onlyLine=1;",
+                actual = comment.minify()
+            )
+        }
+
+        @Test
+        fun `String literals in single line comment`() {
+            val comment = """
+                // String value = " its cool /*   */ " ;
+                
+                String another = " not cool" ;
+            """.trimIndent()
+
+            assertEquals(
+                "String another=\" not cool\";",
+                comment.minify()
+            )
+        }
+
+        @Test
+        fun `String literals in multiline comment`() {
+            val comment = """
+            /*
+                String info = "Hello" ;
+            */
+            String onlyLine = "Bye";
+        """
+
+            assertEquals(
+                expected = "String onlyLine=\"Bye\";",
                 actual = comment.minify()
             )
         }
